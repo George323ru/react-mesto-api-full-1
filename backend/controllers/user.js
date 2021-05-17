@@ -4,6 +4,8 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const MineError = require('../errors/mine-error');
 
+const { NODE_ENV, JWT_SECRET } = process.env;
+
 const ERROR_FOUND = 'Запрашиваемый пользователь не найден';
 
 module.exports.getUsers = (req, res, next) => {
@@ -68,7 +70,11 @@ module.exports.login = (req, res, next) => {
         if (!matched) {
           throw new MineError('Неправильные почта или пароль', 401);
         }
-        const token = jwt.sign({ _id: user._id }, 'some-secret-key', { expiresIn: '7d' });
+
+        const token = jwt.sign(
+          { _id: user._id },
+          NODE_ENV === 'production' ? JWT_SECRET : 'some-secret-key',
+          { expiresIn: '7d' });
         res.send({ token });
       }))
     .catch((error) => {
