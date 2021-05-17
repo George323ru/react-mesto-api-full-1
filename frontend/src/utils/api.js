@@ -92,7 +92,7 @@ class Api {
 
 export const createApi = (token) => {
   return new Api({
-    baseUrl: "api.ts.anastasia.mesto.nomoredomains.icu",
+    baseUrl: "http://api.ts.anastasia.mesto.nomoredomains.icu",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
