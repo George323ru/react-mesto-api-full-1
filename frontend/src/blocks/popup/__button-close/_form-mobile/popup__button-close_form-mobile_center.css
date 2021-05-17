@@ -1,0 +1,7 @@
+@media screen and (max-width: 768px){
+  .popup__button-close_form-mobile_center{
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -200%);
+  }
+}

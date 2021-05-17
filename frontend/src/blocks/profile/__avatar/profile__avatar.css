@@ -1,0 +1,27 @@
+.profile__avatar{
+  margin: 0;
+  padding: 0;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: #000;
+  /* background-image: url("../../../images/avatar.svg"); */
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border: 0;
+  outline: 0;
+}
+
+.profile__avatar:hover::after{
+  content: "";
+  width: 100%;
+  height: 100%;
+  display: block;
+  background-color: rgba(0, 0, 0, 0.8);
+  background-image: url("../../../images/icon-edit.svg");
+  background-size: 26px 26px;
+  background-position: center;
+  background-repeat: no-repeat;
+}

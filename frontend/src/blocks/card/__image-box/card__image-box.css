@@ -1,0 +1,9 @@
+.card__image-box{
+  position: relative;
+}
+
+.card__image-box::after{
+  content: "";
+  padding-bottom: 100%;
+  display: block;
+}

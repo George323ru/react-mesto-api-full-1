@@ -1,0 +1,25 @@
+.page__section{
+  margin-left: calc(200 / 1280 * 100%);
+  margin-right: calc(200 / 1280 * 100%);
+}
+
+@media screen and (max-width: 1024px){
+  .page__section{
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+}
+
+@media screen and (max-width: 768px){
+  .page__section{
+    margin-left: calc(19 / 425 * 100%);
+    margin-right: calc(19 / 425 * 100%);
+  }
+}
+
+@media screen and (max-width: 425px){
+  .page__section{
+    margin-left: 19px;
+    margin-right: 19px;
+  }
+}

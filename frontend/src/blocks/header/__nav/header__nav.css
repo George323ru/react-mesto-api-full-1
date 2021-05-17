@@ -1,0 +1,20 @@
+.header__nav{
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+@media screen and (max-width: 768px){
+  .header__nav{
+    padding: 0 0 40px;
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    border-bottom: solid 1px #545454;
+  }
+}

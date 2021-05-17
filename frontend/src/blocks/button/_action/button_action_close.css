@@ -1,0 +1,14 @@
+.button_action_close{
+  width: 40px;
+  height: 40px;
+  background-image: url("../../../images/icon-close.svg");
+  background-size: 58px;
+}
+
+@media screen and (max-width: 768px){
+  .button_action_close{
+    width: 32px;
+    height: 32px;
+    background-size: 40px;
+  }
+}

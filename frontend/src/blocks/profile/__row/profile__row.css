@@ -1,0 +1,11 @@
+.profile__row{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+@media screen and (max-width: 425px){
+  .profile__row{
+    margin-left: calc(18px + 10px);
+  }
+}

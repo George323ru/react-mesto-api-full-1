@@ -1,0 +1,5 @@
+@media screen and (max-width: 768px){
+  .form_mobile_large{
+    width: calc(100% - 2 * 20px);
+  }
+}
