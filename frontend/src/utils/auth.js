@@ -1,4 +1,4 @@
-export const BASE_URL = "http://localhost:3005" // "https://auth.nomoreparties.co";
+export const BASE_URL = "api.ts.anastasia.mesto.nomoredomains.icu";
 
 export const register = (email, password) => {
   return fetch(`${BASE_URL}/signup`, {

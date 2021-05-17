@@ -16,7 +16,7 @@ const app = express();
 app.use(helmet());
 app.use(express.json());
 app.use(cors({
-  origin: "http://localhost:3000",
+  origin: 'ts.anastasia.mesto.nomoredomains.icu',
 }));
 
 mongoose.connect('mongodb://localhost:27017/mestodb', {

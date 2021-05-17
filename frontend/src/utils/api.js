@@ -92,10 +92,10 @@ class Api {
 
 export const createApi = (token) => {
   return new Api({
-    baseUrl: "http://localhost:3005",  // 'https://mesto.nomoreparties.co/v1/cohort-20',
+    baseUrl: "api.ts.anastasia.mesto.nomoredomains.icu",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
   });
-}
+};
