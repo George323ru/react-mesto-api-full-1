@@ -13,7 +13,7 @@ import EditProfilePopup from "./EditProfilePopup";
 import ImagePopup from "./ImagePopup";
 import InfoTooltip from "./InfoTooltip";
 import * as auth from "../utils/auth";
-import api from "../utils/api";
+import { createApi } from "../utils/api";
 import { CurrentEmailContext } from "../contexts/CurrentEmailContext";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import { LoadingFormContext } from "../contexts/LoadingFormContext";
@@ -23,6 +23,7 @@ const App = () => {
   const history = useHistory();
 
   const [isloggedIn, setIsLoggedIn] = React.useState(false);
+  const [api, setApi] = React.useState({});
 
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isDeleteCardPopupOpen, setIsDeleteCardPopupOpen] = React.useState(false);
@@ -98,7 +99,7 @@ const App = () => {
   };
 
   const handleCardLike = (card) => {
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes.some((userId) => userId === currentUser._id);
 
     api.changeLikeCardStatus(card._id, isLiked)
       .then((newCard) => {
@@ -114,8 +115,9 @@ const App = () => {
       auth.checkToken(jwt)
         .then((res) => {
           if (res) {
-            setCurrentEmail(res.data.email);
+            setCurrentEmail(res.email);
             setIsLoggedIn(true);
+            updateContent(jwt);
           }
         })
         .catch((error) => {
@@ -193,6 +195,19 @@ const App = () => {
       });
   };
 
+  const updateContent = (token) => {
+    const newApi = createApi(token);
+    setApi(newApi);
+    Promise.all([newApi.getUserInfo(), newApi.getInitialCards()])
+      .then(([userData, dataCards]) => {
+        setCurrentUser(userData);
+        setCards(dataCards.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   useEffect(() => {
     handleCheckToken();
   }, []);
@@ -200,17 +215,6 @@ const App = () => {
   useEffect(() => {
     isloggedIn && history.push("/");
   }, [isloggedIn]);
-
-  useEffect(() => {
-    Promise.all([api.getUserInfo(), api.getInitialCards()])
-      .then(([userData, cards]) => {
-        setCurrentUser(userData);
-        setCards(cards);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
 
   return (
     <div className="page">
@@ -227,6 +231,7 @@ const App = () => {
               isloggedIn={isloggedIn}
               component={Main}
               cards={cards}
+              //onMain={updateContent}
               onAddPlace={handleAddPlaceClick}
               onCardClick={handleCardClick}
               onCardDelete={handleCardDelete}

@@ -24,7 +24,9 @@ const Main = (props) => {
 
       <section className="page__section">
         <ul className="cards" id="test">{
-          props.cards.map((card) => (
+          props.cards.sort((prev, next) => {
+            if (prev.createdAt > next.createdAt) return -1;
+          }).map((card) => (
             <Card 
               key={card._id} 
               card={card} 

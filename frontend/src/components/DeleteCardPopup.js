@@ -13,10 +13,11 @@ const AddPlacePopup = (props) => {
       name="deleteCard" 
       title="Вы уверены?"
       submitTitle = "Да" 
-      isOpen={props.isOpen} 
+      isOpen={props.isOpen}
+      isValid={true} 
       onClose={props.onClose} 
-      onSubmit={handleSubmit}>
-    </PopupWithForm>
+      onSubmit={handleSubmit}
+    />
   );
 }
 
