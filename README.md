@@ -11,6 +11,9 @@
 - редактирование автара и других данных пользователя.   
 
 Испольнитель: Анастасия Циберная, 2021г.   
+IP-адрес сервера: 84.201.130.16
+URL для фронтенд части: https://ts.anastasia.mesto.nomoredomains.icu
+URL для api: https://api.ts.anastasia.mesto.nomoredomains.icu
 
 ## Структура проекта
 Директории:   
