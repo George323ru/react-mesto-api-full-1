@@ -6,6 +6,7 @@ const { celebrate, Joi, errors } = require('celebrate');
 const cors = require('cors');
 
 const auth = require('./middlewares/auth');
+const { createUser, login } = require('./controllers/user');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const MineError = require('./errors/mine-error');
 
@@ -33,17 +34,35 @@ app.get('/crash-test', () => {
   }, 0);
 });
 
-app.use('/signin', require('./routes/signin'));
-app.use('/signup', require('./routes/signup'));
+app.post('/signup', celebrate({
+  body: Joi.object().keys({
+    email: Joi.string().required().email(),
+    password: Joi.string().required(),
+    name: Joi.string().min(2).max(30),
+    about: Joi.string().min(2).max(30),
+    // eslint-disable-next-line no-useless-escape
+    avatar: Joi.string().pattern(/^(http|https):\/\/(www\.)?[a-z\d\.\-_~:/?#\[\]@!$&'()\*\+,;=]+/),
+  }),
+}), createUser);
 
-app.use(celebrate({
+app.post('/signin', celebrate({
+  body: Joi.object().keys({
+    email: Joi.string().required().email(),
+    password: Joi.string().required(),
+  }),
+}), login);
+
+app.use('/users', celebrate({
   headers: Joi.object().keys({
     authorization: Joi.string().required(),
   }).unknown(true),
-}), auth);
+}), auth, require('./routes/user'));
 
-app.use('/users', require('./routes/user'));
-app.use('/cards', require('./routes/card'));
+app.use('/cards', celebrate({
+  headers: Joi.object().keys({
+    authorization: Joi.string().required(),
+  }).unknown(true),
+}), auth, require('./routes/card'));
 
 app.use('*', (req, res, next) => next(new MineError('Ресурс не найден', 404)));
 
