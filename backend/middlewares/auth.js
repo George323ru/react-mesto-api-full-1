@@ -17,7 +17,7 @@ module.exports = (req, res, next) => {
   try {
     payload = jwt.verify(
       token,
-      NODE_ENV === 'production' ? JWT_SECRET : 'some-secret-key'
+      NODE_ENV === 'production' ? JWT_SECRET : 'some-secret-key',
     );
   } catch (error) {
     throw new MineError('Необходима авторизация', 401);
